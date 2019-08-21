@@ -9,7 +9,9 @@ using System.ComponentModel.DataAnnotations;
 
 namespace React.Controllers
 {
-    [Route("api/[controller]")]
+	private readonly MvcMovieContext _context;
+
+	[Route("api/[controller]")]
     public class MovieController : Controller
     {
         //array of strings
