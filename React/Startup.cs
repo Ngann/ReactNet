@@ -23,7 +23,7 @@ namespace React
         {
             services.AddEntityFrameworkNpgsql()
                 .AddDbContext<MvcMovieContext>()
-                .BuildServiceProvider();
+				.BuildServiceProvider();
 
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);

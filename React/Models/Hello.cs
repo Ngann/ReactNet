@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace React.Models
 {
-    public class MovieSometing
+    public class Hello
     {
 
         public int Id { get; set; }

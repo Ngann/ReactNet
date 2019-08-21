@@ -9,13 +9,20 @@ using System.ComponentModel.DataAnnotations;
 
 namespace React.Controllers
 {
-	private readonly MvcMovieContext _context;
+
 
 	[Route("api/[controller]")]
     public class MovieController : Controller
     {
-        //array of strings
-        private static string[] Summaries = new[]
+
+		//private readonly MvcMovieContext _context;
+
+		//public MoviesController(MvcMovieContext context)
+		//{
+		//	_context = context;
+		//}
+
+		private static string[] Summaries = new[]
         {
             "Drama", "Action", "Horror", "Thriller", "Romance", "Other"
         };
@@ -33,7 +40,7 @@ namespace React.Controllers
         //
         [HttpGet("[action]")]
         public IEnumerable<Movie> MovieList()
-        {
+		{
             var rng = new Random();
             return Enumerable.Range(1,5 ).Select(index => new Movie
             {
