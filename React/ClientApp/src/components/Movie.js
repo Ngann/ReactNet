@@ -5,26 +5,50 @@ export class Movie extends Component {
 
   constructor (props) {
     super(props);
-    this.state = { currentCount: 0 };
-    this.incrementCounter = this.incrementCounter.bind(this);
+    this.state = { movies: [], loading: true };
+
+    fetch('api/Movie/MovieList')
+      .then(response => response.json())
+      .then(data => {
+        this.setState({ movies: data, loading: false });
+      });
   }
 
-  incrementCounter () {
-    this.setState({
-      currentCount: this.state.currentCount + 1
-    });
+  static rendermoviesTable (movies) {
+    return (
+      <table className='table table-striped'>
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Release Date</th>
+            <th>Genre</th>
+            <th>Price</th>
+          </tr>
+        </thead>
+        <tbody>
+          {movies.map(movie =>
+            <tr key={movie.dateFormatted}>
+               <td>{movie.names}</td>
+               <td>{movie.dateFormatted}</td>
+              <td>{movie.genre}</td>
+              <td>{movie.price}</td>
+            </tr>
+          )}
+        </tbody>
+      </table>
+    );
   }
 
   render () {
+    let contents = this.state.loading
+      ? <p><em>Loading...</em></p>
+      : Movie.rendermoviesTable(this.state.movies);
+
     return (
       <div>
-        <h1>Counter: Movie</h1>
-
-        <p>This is a simple example of a React component.</p>
-
-        <p>Current count: <strong>{this.state.currentCount}</strong></p>
-
-        <button className="btn btn-primary" onClick={this.incrementCounter}>Increment</button>
+        <h1>Movie Lists</h1>
+        <p>This component demonstrates fetching data from the server.</p>
+        {contents}
       </div>
     );
   }
